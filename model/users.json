@@ -1,0 +1,17 @@
+[
+  {
+    "email": "admin",
+    "password": "$2b$10$XjXOZlqdgEtaLJqPT6AOJ.qdfZkPPG7IrLID1gxJchO5n5hnri2FG",
+    "role": "admin"
+  },
+  {
+    "email": "agent",
+    "password": "$2b$10$cEt/8lK5JFUzK9xu/VNtCuq/xthvXxSbe3JdiKh3OLl2QCnu8crUO",
+    "role": "agent"
+  },
+  {
+    "email": "biltu",
+    "password": "$2b$10$2nVlFJjoQpUZ6zk28KeUSu5WkMnhI41AmpwiVUV8rbKz9uOrPiPWC",
+    "role": "agent"
+  }
+]
