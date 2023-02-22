@@ -3,6 +3,7 @@ interface User {
     email: string
     password: string
     role: string
+    refreshToken?: string
     // createdAt : timestamp
     // updatedAt : timestamp
 }
