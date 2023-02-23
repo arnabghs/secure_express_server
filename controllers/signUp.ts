@@ -20,7 +20,7 @@ const handleSignUp = async (req: AuthDetailsRequest, res: Response) => {
     }
     try {
         const hashedPwd = await bcrypt.hash(password, 10)
-        const newUser: User = {email: emailID, password: hashedPwd, role: "agent"}
+        const newUser: User = {email: emailID, password: hashedPwd, role: "agent", refreshToken : ''}
 
         const updatedUsers = ([...usersDB.users, newUser])
         await fs.promises.writeFile('./model/users.json', JSON.stringify(updatedUsers))

@@ -38,7 +38,7 @@ const handleSignIn = async (req: AuthDetailsRequest, res: Response) => {
         })
         await fs.promises.writeFile('./model/users.json', JSON.stringify(updatedUsers))
 
-        res.cookie('jwt', refreshToken, {httpOnly: true, sameSite: 'none',  maxAge: 24 * 60 * 60 * 1000}) //for prod : secure: true
+        res.cookie('jwt', refreshToken, {httpOnly: true, sameSite: 'none', secure: true ,maxAge: 24 * 60 * 60 * 1000})
         res.json({role: foundUser.role, accessToken: accessToken})
     } else {
         res.status(StatusCodes.UNAUTHORIZED).json({'message': 'incorrect password'})

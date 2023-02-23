@@ -1,4 +1,4 @@
-import {Response, Request, NextFunction} from "express";
+import {Response, Request} from "express";
 import {StatusCodes} from "http-status-codes";
 import dbUsers from '../model/users.json'
 import {Users} from "../model/user";
