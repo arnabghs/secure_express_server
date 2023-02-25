@@ -14,7 +14,7 @@ const handleLogout = async (req: Request, res: Response) => {
 
     const foundUser = usersDB.users.find(user => user.refreshToken === refreshToken)
     if (!foundUser) {
-        res.clearCookie('jwt', {httpOnly: true, sameSite: 'none'})
+        res.clearCookie('jwt', {httpOnly: true, sameSite: 'none', secure: true})
         return res.sendStatus(StatusCodes.NO_CONTENT)
     }
 
@@ -23,7 +23,7 @@ const handleLogout = async (req: Request, res: Response) => {
         return user
     })
     await fs.promises.writeFile('./model/users.json', JSON.stringify(updatedUsers))
-    res.clearCookie('jwt', {httpOnly: true, sameSite: 'none', })
+    res.clearCookie('jwt', {httpOnly: true, sameSite: 'none', secure: true})
     res.sendStatus(StatusCodes.NO_CONTENT)
 }
 

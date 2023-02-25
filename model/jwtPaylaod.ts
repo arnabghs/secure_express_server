@@ -1,5 +1,10 @@
-interface JwtPayload {
-  email: string
+interface RefreshJwtPayload {
+    email: string,
 }
 
-export { JwtPayload}
+interface AccessJwtPayload {
+    email: string,
+    role: string
+}
+
+export {AccessJwtPayload, RefreshJwtPayload}

@@ -5,6 +5,7 @@ import dbUsers from '../model/users.json'
 import {User, Users} from "../model/user";
 import {AuthDetailsRequest} from "../model/request";
 import { Response} from "express";
+import {ROLES} from "../config/roleList";
 
 const handleSignUp = async (req: AuthDetailsRequest, res: Response) => {
     const usersDB: Users = {
@@ -20,7 +21,7 @@ const handleSignUp = async (req: AuthDetailsRequest, res: Response) => {
     }
     try {
         const hashedPwd = await bcrypt.hash(password, 10)
-        const newUser: User = {email: emailID, password: hashedPwd, role: "agent", refreshToken : ''}
+        const newUser: User = {email: emailID, password: hashedPwd, role: ROLES.AGENT, refreshToken : ''}
 
         const updatedUsers = ([...usersDB.users, newUser])
         await fs.promises.writeFile('./model/users.json', JSON.stringify(updatedUsers))

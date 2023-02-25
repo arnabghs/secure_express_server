@@ -1,7 +1,8 @@
 import {Request} from 'express';
 
 export interface AuthenticatedUserRequest extends Request {
-    user: string
+    userEmail?: string,
+    userRole?: string
 }
 
 export interface AuthDetailsRequest extends Request {
