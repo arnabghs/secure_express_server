@@ -1,30 +1,19 @@
 import {Response, Request} from "express";
 import {StatusCodes} from "http-status-codes";
-import {User, Users} from "../model/user";
-import dbUsers from "../model/users.json";
-import fs from "fs";
+import {pool} from "../database/db";
 
 const handleLogout = async (req: Request, res: Response) => {
-    const usersDB: Users = {
-        users: dbUsers
-    }
     const cookies = req.cookies
     const refreshToken = cookies?.jwt
     if (!refreshToken) return res.sendStatus(StatusCodes.NO_CONTENT)
-
-    const foundUser = usersDB.users.find(user => user.refreshToken === refreshToken)
-    if (!foundUser) {
-        res.clearCookie('jwt', {httpOnly: true, sameSite: 'none', secure: true})
+    try {
+        await pool.query("UPDATE users SET refresh_token  = '' WHERE refresh_token = $1", [refreshToken])
+    } catch (e : any) {
+        console.error("error while cleaning refresh token: ", e)
         return res.sendStatus(StatusCodes.NO_CONTENT)
     }
-
-    const updatedUsers = usersDB.users.map((user: User): User => {
-        if (user.email == foundUser.email) return {...user, refreshToken: ""}
-        return user
-    })
-    await fs.promises.writeFile('./model/users.json', JSON.stringify(updatedUsers))
     res.clearCookie('jwt', {httpOnly: true, sameSite: 'none', secure: true})
-    res.sendStatus(StatusCodes.NO_CONTENT)
+    res.status(StatusCodes.OK).send("successfully logged out")
 }
 
 export {handleLogout}

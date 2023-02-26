@@ -1,15 +1,11 @@
 interface User {
-    // id: serial
+    id: string
     email: string
     password: string
     role: string
     refreshToken: string
-    // createdAt : timestamp
-    // updatedAt : timestamp
+    createdAt: string
+    updatedAt: string
 }
 
-interface Users {
-    users: User[]
-}
-
-export {Users, User}
+export {User}
