@@ -24,7 +24,7 @@ const handleRefreshToken = (req: Request, res: Response) => {
             const accessToken = jwt.sign({email: foundUser.email, role: foundUser.role},
                 process.env.ACCESS_TOKEN_SECRET as Secret, {expiresIn: '1h'})
 
-            res.json({accessToken})
+            res.json({accessToken: accessToken, role: foundUser.role})
         }
     )
 }
